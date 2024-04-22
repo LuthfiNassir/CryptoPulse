@@ -3,7 +3,7 @@ import plotly.express as px
 import streamlit as st
 import plotly.graph_objects as go
 
-st.set_page_config(page_title="StockPlex",
+st.set_page_config(page_title="StockPulse",
                    page_icon=":bar_chart:",
                    layout="wide")
 
@@ -20,6 +20,30 @@ st.markdown("##")
 
 #KPI
 df_2023_onw = df[df['Date'].dt.year >= 2023] # Filter data starting from 2024 onwards
+average_price = round(df_2023_onw['Open'].mean(), 2)
+average_high = round(df_2023_onw['High'].mean(), 2)
+average_low = round(df_2023_onw['Low'].mean(), 2)
+average_volume = int(df_2023_onw['Volume'].mean())
+
+
+c1,c2,c3,c4=st.columns(4)
+with c1:
+    st.subheader("Average Daily price")
+    st.subheader(f"US $ {average_price:,}")
+
+with c2:
+    st.subheader("Average High price")
+    st.subheader(f"US $ {average_high:,}")
+
+with c3:
+    st.subheader("Average Low price")
+    st.subheader(f"US $ {average_low:,}")
+
+with c4:
+    st.subheader("Average Volume")
+    st.subheader(f"US $ {average_volume:,}")
+
+st.markdown('---')
 
 
 st.header('Stock Price Movement Over Time', divider='rainbow')
@@ -30,28 +54,24 @@ with tab1:
     col1,col2,col3,col4=st.columns(4) # to get columns
 
     with col1:
-        open_var = df_2023_onw.groupby(['Date'])['Open'].mean().reset_index()
-        # Plotting the line chart
-        fig_line = px.line(open_var, x='Date', y='Open', title='Open Price', height=400, width=400)
-        st.plotly_chart(fig_line)
+        open_gr = df_2023_onw.groupby(['Date'])['Open'].mean().reset_index()
+        fig_line = px.line(open_gr, x='Date', y='Open', title='Open Price') # Plotting the line chart
+        st.plotly_chart(fig_line, use_container_width=True)
 
     with col2:
-        open_var = df_2023_onw.groupby(['Date'])['High'].mean().reset_index()
-        # Plotting the line chart
-        fig_line = px.line(open_var, x='Date', y='High', title='High Price', height=400, width=400)
-        st.plotly_chart(fig_line)
+        high_gr = df_2023_onw.groupby(['Date'])['High'].mean().reset_index()
+        fig_line = px.line(high_gr, x='Date', y='High', title='High Price') # Plotting the line chart
+        st.plotly_chart(fig_line, use_container_width=True)
 
     with col3:
-        open_var = df_2023_onw.groupby(['Date'])['Low'].mean().reset_index()
-        # Plotting the line chart
-        fig_line = px.line(open_var, x='Date', y='Low', title='Low Price', height=400, width=400)
-        st.plotly_chart(fig_line)
+        low_gr = df_2023_onw.groupby(['Date'])['Low'].mean().reset_index()
+        fig_line = px.line(low_gr, x='Date', y='Low', title='Low Price') # Plotting the line chart
+        st.plotly_chart(fig_line, use_container_width=True)
 
     with col4:
-        open_var = df_2023_onw.groupby(['Date'])['Close'].mean().reset_index()
-        # Plotting the line chart
-        fig_line = px.line(open_var, x='Date', y='Close', title='Close Price', height=400, width=400)
-        st.plotly_chart(fig_line)
+        close_gr = df_2023_onw.groupby(['Date'])['Close'].mean().reset_index()
+        fig_line = px.line(close_gr, x='Date', y='Close', title='Close Price') # Plotting the line chart
+        st.plotly_chart(fig_line, use_container_width=True)
         
 
 with tab2:
@@ -61,7 +81,7 @@ with tab2:
                                             low=df_2023_onw['Low'],
                                             close=df_2023_onw['Close'])])
     candle.update_layout(title="Candlestick Chart for Daily Stock Prices")
-    st.plotly_chart(candle)  
+    st.plotly_chart(candle, use_container_width=True)  
 
 
 st.markdown("---")
@@ -74,10 +94,9 @@ vol_month = (
     .reset_index()
     .sort_values(by="Date")
 )
-
-# LuthfiNassir
-
-fig_amount = px.bar(
+ 
+# Volume trade bar chart
+vol_bar = px.bar(
     vol_month,
     x="Date",
     y="Volume",
@@ -87,10 +106,10 @@ fig_amount = px.bar(
     template="plotly_white",
     height=400, width=400,
 )
-fig_amount.update_layout(
+vol_bar.update_layout(
     yaxis=(dict(showgrid=False))
 )
-st.plotly_chart(fig_amount)
+st.plotly_chart(vol_bar, use_container_width=True)
 
 hide_st_style = """
             <style>
