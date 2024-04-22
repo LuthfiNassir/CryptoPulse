@@ -1,6 +1,7 @@
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+import plotly.graph_objects as go
 
 st.set_page_config(page_title="StockPlex",
                    page_icon=":bar_chart:",
@@ -18,38 +19,53 @@ st.markdown("<h1 style='text-align: center; color: white;'> StockPlex: Dynamic M
 st.markdown("##")
 
 #KPI
-df_2023_onw = df[df['Date'].dt.year >= 2023] # Filter the DataFrame for data starting from 2024 onwards
+df_2023_onw = df[df['Date'].dt.year >= 2023] # Filter data starting from 2024 onwards
 
 
 st.header('Stock Price Movement Over Time', divider='rainbow')
-col1,col2,col3,col4=st.columns(4)
 
-with col1:
-    open_var = df_2023_onw.groupby(['Date'])['Open'].mean().reset_index()
-    #Plotting the line chart
-    fig_line = px.line(open_var, x='Date', y='Open', title='Open Price', height=400, width=400)
-    st.plotly_chart(fig_line)
+tab1,tab2=st.tabs(["Line Chart","Candlestick Chart"])
 
-with col2:
-    open_var = df_2023_onw.groupby(['Date'])['High'].mean().reset_index()
-    #Plotting the line chart
-    fig_line = px.line(open_var, x='Date', y='High', title='High Price', height=400, width=400)
-    st.plotly_chart(fig_line)
+with tab1:
+    col1,col2,col3,col4=st.columns(4) # to get columns
 
-with col3:
-    open_var = df_2023_onw.groupby(['Date'])['Low'].mean().reset_index()
-    #Plotting the line chart
-    fig_line = px.line(open_var, x='Date', y='Low', title='Low Price', height=400, width=400)
-    st.plotly_chart(fig_line)
+    with col1:
+        open_var = df_2023_onw.groupby(['Date'])['Open'].mean().reset_index()
+        # Plotting the line chart
+        fig_line = px.line(open_var, x='Date', y='Open', title='Open Price', height=400, width=400)
+        st.plotly_chart(fig_line)
 
-with col4:
-    open_var = df_2023_onw.groupby(['Date'])['Close'].mean().reset_index()
-    #Plotting the line chart
-    fig_line = px.line(open_var, x='Date', y='Close', title='Close Price', height=400, width=400)
-    st.plotly_chart(fig_line)
-    
+    with col2:
+        open_var = df_2023_onw.groupby(['Date'])['High'].mean().reset_index()
+        # Plotting the line chart
+        fig_line = px.line(open_var, x='Date', y='High', title='High Price', height=400, width=400)
+        st.plotly_chart(fig_line)
+
+    with col3:
+        open_var = df_2023_onw.groupby(['Date'])['Low'].mean().reset_index()
+        # Plotting the line chart
+        fig_line = px.line(open_var, x='Date', y='Low', title='Low Price', height=400, width=400)
+        st.plotly_chart(fig_line)
+
+    with col4:
+        open_var = df_2023_onw.groupby(['Date'])['Close'].mean().reset_index()
+        # Plotting the line chart
+        fig_line = px.line(open_var, x='Date', y='Close', title='Close Price', height=400, width=400)
+        st.plotly_chart(fig_line)
+        
+
+with tab2:
+    candle = go.Figure(data=[go.Candlestick(x=df_2023_onw['Date'],
+                                            open=df_2023_onw['Open'],
+                                            high=df_2023_onw['High'],
+                                            low=df_2023_onw['Low'],
+                                            close=df_2023_onw['Close'])])
+    candle.update_layout(title="Candlestick Chart for Daily Stock Prices")
+    st.plotly_chart(candle)  
+
 
 st.markdown("---")
+
 
 # Group by date
 vol_month = (
