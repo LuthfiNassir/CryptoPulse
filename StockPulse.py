@@ -58,7 +58,7 @@ vol_month = (
     .sort_values(by="Date")
 )
 
-# just for the fundamental colaburation
+
 
 fig_amount = px.bar(
     vol_month,
