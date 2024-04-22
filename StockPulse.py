@@ -58,7 +58,7 @@ vol_month = (
     .sort_values(by="Date")
 )
 
-
+# checking if there is any eshoe
 
 fig_amount = px.bar(
     vol_month,
