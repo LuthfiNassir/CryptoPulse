@@ -7,6 +7,18 @@ st.set_page_config(page_title="StockPulse",
                    page_icon=":bar_chart:",
                    layout="wide")
 
+theme = """
+            <style>
+                [data-testid="stAppViewBlockContainer"]{
+                background-color: #282828;
+                } 
+                .st-emotion-cache-z5fcl4 {
+                    padding: 1rem 3rem 2rem;
+                    color: #FFFFFF;
+                }  
+            </style>
+            """
+st.markdown(theme, unsafe_allow_html=True)
 
 df = pd.read_excel(
     io='btc.xlsx',
@@ -15,7 +27,7 @@ df = pd.read_excel(
 )
 
 # Main Page
-st.markdown("<h1 style='text-align: center; color: white;'> StockPlex: Dynamic Market Insights</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: #FFFFF;'> StockPlex: Dynamic Market Insights</h1>", unsafe_allow_html=True)
 st.markdown("##")
 
 #KPI
@@ -26,27 +38,28 @@ average_low = round(df_2023_onw['Low'].mean(), 2)
 average_volume = int(df_2023_onw['Volume'].mean())
 
 
+
 c1,c2,c3,c4=st.columns(4)
 with c1:
-    st.subheader("Average Daily price")
+    st.markdown("<h3 style=' color: #FF5733;'>Average Daily price</h3>", unsafe_allow_html=True)
     st.subheader(f"US $ {average_price:,}")
 
 with c2:
-    st.subheader("Average High price")
+    st.markdown("<h3 style=' color: #FF5733;'>Average High price</h3>", unsafe_allow_html=True)
     st.subheader(f"US $ {average_high:,}")
 
 with c3:
-    st.subheader("Average Low price")
+    st.markdown("<h3 style=' color: #FF5733;'>Average Low price</h3>", unsafe_allow_html=True)
     st.subheader(f"US $ {average_low:,}")
 
 with c4:
-    st.subheader("Average Volume")
+    st.markdown("<h3 style=' color: #FF5733;'>Average Volume</h3>", unsafe_allow_html=True)
     st.subheader(f"US $ {average_volume:,}")
 
 st.markdown('---')
 
 
-st.header('Stock Price Movement Over Time', divider='rainbow')
+st.header('Stock Price Movement Over Time', divider='orange')
 
 tab1,tab2=st.tabs(["Line Chart","Candlestick Chart"])
 
@@ -111,10 +124,12 @@ vol_bar.update_layout(
 )
 st.plotly_chart(vol_bar, use_container_width=True)
 
+
 hide_st_style = """
             <style>
             #MainMenu {visibility : hidden;}
             footer {visibility: hidden;}
+            body {background-color: #31EC56;}
             header {visibility: hidden;}
             </style>
             """
