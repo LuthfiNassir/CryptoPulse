@@ -48,10 +48,6 @@ with col4:
     fig_line = px.line(open_var, x='Date', y='Close', title='Close Price', height=400, width=400)
     st.plotly_chart(fig_line)
     
-    open_var = df_2023_onw.groupby(['Date'])['Close'].mean().reset_index()
-    #Plotting the line chart
-    fig_line = px.line(open_var, x='Date', y='Close', title='Close Price', height=400, width=400)
-    st.plotly_chart(fig_line)
 
 st.markdown("---")
 
