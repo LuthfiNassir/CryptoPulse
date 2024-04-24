@@ -10,12 +10,22 @@ st.set_page_config(page_title="StockPulse",
 theme = """
             <style>
                 [data-testid="stAppViewBlockContainer"]{
-                background-color: #282828;
+                background-color: #021619;
                 } 
                 .st-emotion-cache-z5fcl4 {
                     padding: 1rem 3rem 2rem;
                     color: #FFFFFF;
                 }  
+                .st-cd {
+                    background-color: #118d95;
+                }
+                p {
+                    color: #699eb8;
+                }
+                .st-cu {
+                    # background: linear-gradient(to right, #699eb8 100%, #699eb8 100%, #699eb8 100%, #699eb8 100%);
+                }
+                
             </style>
             """
 st.markdown(theme, unsafe_allow_html=True)
@@ -27,11 +37,17 @@ df = pd.read_excel(
 )
 
 # Main Page
-st.markdown("<h1 style='text-align: center; color: #FFFFF;'> StockPlex: Dynamic Market Insights</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color:#ffffff;'> StockPlex: Dynamic Market Insights</h1>", unsafe_allow_html=True)
 st.markdown("##")
 
+
+year = st.select_slider(
+    "Select a from which year onwards ",
+    options=['2024', '2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015', '2014', '2013', '2012', '2011', '2010'],
+    )
+
 #KPI
-df_2023_onw = df[df['Date'].dt.year >= 2023] # Filter data starting from 2024 onwards
+df_2023_onw = df[df['Date'].dt.year == int(year)] # Filter data starting from 2024 onwards
 average_price = round(df_2023_onw['Open'].mean(), 2)
 average_high = round(df_2023_onw['High'].mean(), 2)
 average_low = round(df_2023_onw['Low'].mean(), 2)
@@ -39,27 +55,28 @@ average_volume = int(df_2023_onw['Volume'].mean())
 
 
 
+
 c1,c2,c3,c4=st.columns(4)
 with c1:
-    st.markdown("<h3 style=' color: #FF5733;'>Average Daily price</h3>", unsafe_allow_html=True)
-    st.subheader(f"US $ {average_price:,}")
+    st.markdown("<h3 style=' color: #118d95;'>Average Daily price</h3>", unsafe_allow_html=True)
+    st.markdown(f"<h3 style=' color: #699eb8;'>US $ {average_price:,}</h3>", unsafe_allow_html=True)
 
 with c2:
-    st.markdown("<h3 style=' color: #FF5733;'>Average High price</h3>", unsafe_allow_html=True)
-    st.subheader(f"US $ {average_high:,}")
+    st.markdown("<h3 style=' color: #118d95;'>Average High price</h3>", unsafe_allow_html=True)
+    st.markdown(f"<h3 style=' color: #699eb8;'>US $ {average_high:,}</h3>", unsafe_allow_html=True)
 
 with c3:
-    st.markdown("<h3 style=' color: #FF5733;'>Average Low price</h3>", unsafe_allow_html=True)
-    st.subheader(f"US $ {average_low:,}")
+    st.markdown("<h3 style=' color: #118d95;'>Average Low price</h3>", unsafe_allow_html=True)
+    st.markdown(f"<h3 style=' color: #699eb8;'>US $ {average_low:,}</h3>", unsafe_allow_html=True)
 
 with c4:
-    st.markdown("<h3 style=' color: #FF5733;'>Average Volume</h3>", unsafe_allow_html=True)
-    st.subheader(f"US $ {average_volume:,}")
+    st.markdown("<h3 style=' color: #118d95;'>Average Volume</h3>", unsafe_allow_html=True)
+    st.markdown(f"<h3 style=' color: #699eb8;'>US $ {average_volume:,}</h3>", unsafe_allow_html=True)
 
-st.markdown('---')
+st.markdown('##')
 
 
-st.header('Stock Price Movement Over Time', divider='orange')
+st.header('Bitcoin Price Movement Over Time', divider='green')
 
 tab1,tab2=st.tabs(["Line Chart","Candlestick Chart"])
 
