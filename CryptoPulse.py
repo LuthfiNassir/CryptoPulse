@@ -155,7 +155,7 @@ with coll1:
 
 with coll2:
     Vwap=px.line(vwDf,x='Date',y='VWAP',title="Volume-Weighted Average Price (VWAP)")
-    st.plotly_chart(Vwap)
+    st.plotly_chart(Vwap,use_container_width=True)
 st.markdown('---')
 
 df_mov=df[df['Date'].dt.year>=2020]
