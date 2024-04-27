@@ -134,21 +134,38 @@ vol_month = (
     .sort_values(by="Date")
 )
  
+coll1,coll2=st.columns(2)
+with coll1:
 # Volume trade bar chart
-vol_bar = px.bar(
-    vol_month,
-    x="Date",
-    y="Volume",
-    orientation="v",
-    title="Volume of Trades Over Time",
-    color_discrete_sequence=["#0083B8"] * len(vol_month),
-    template="plotly_white",
-    height=400, width=400,
-)
-vol_bar.update_layout(
-    yaxis=(dict(showgrid=False))
-)
-st.plotly_chart(vol_bar, use_container_width=True)
+    vol_bar = px.bar(
+        vol_month,
+        x="Date",
+        y="Volume",
+        orientation="v",
+        title="Volume of Trades Over Time",
+        color_discrete_sequence=["#0083B8"] * len(vol_month),
+        template="plotly_white",
+        height=400, width=400,
+    )
+    vol_bar.update_layout(
+        yaxis=(dict(showgrid=False))
+    )
+    vol_bar.update_xaxes(title=' ')
+    vol_bar.update_yaxes(title=' ')
+    st.plotly_chart(vol_bar, use_container_width=True)
+
+with coll2:
+    df_mov=df[df['Date'].dt.year>=2020]
+    df_mov['50-day'] = df_mov['Close'].rolling(window=50).mean()
+    df_mov['200-day'] = df_mov['Close'].rolling(window=200).mean()
+
+    # Create the line chart
+    fig = px.line(df_mov, x='Date', y=['50-day', '200-day'], title='Moving Averages')
+    fig.update_xaxes(title='Date')
+    fig.update_yaxes(title='Price')
+
+    # Display the line chart using Streamlit
+    st.plotly_chart(fig)
 
 
 hide_st_style = """
