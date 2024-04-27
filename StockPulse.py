@@ -40,11 +40,9 @@ st.markdown("##")
 
 
 
-#KPI
+#setting the date
 startDate = datetime.date(2010, 7, 18)
 endDate = datetime.date(2024, 3, 19)
-
-
 d = st.date_input(
     "Select Date Range",
     (datetime.date(2024, 1, 1), endDate),
@@ -57,12 +55,14 @@ start_date = datetime.datetime(d[0].year, d[0].month, d[0].day)  # Convert to da
 end_date = datetime.datetime(d[1].year, d[1].month, d[1].day)  # Convert to datetime
 df_filtered = df[(df['Date'] >= start_date) & (df['Date'] <= end_date)]
 
+# KPI
 average_price = round(df_filtered['Open'].mean(), 2)
 average_high = round(df_filtered['High'].mean(), 2)
 average_low = round(df_filtered['Low'].mean(), 2)
 average_volume = int(df_filtered['Volume'].mean())
 
-
+vwSeries=(df_filtered['Close'] * df_filtered['Volume']).cumsum() / df_filtered['Volume'].cumsum()
+vwDf=pd.DataFrame({'Date':df_filtered['Date'],'VWAP':vwSeries})
 
 
 c1,c2,c3,c4=st.columns(4)
@@ -91,7 +91,6 @@ tab1,tab2=st.tabs(["Line Chart","Candlestick Chart"])
 
 with tab1:
     col1,col2,col3,col4=st.columns(4) # to get columns
-
     with col1:
         open_gr = df_filtered.groupby(['Date'])['Open'].mean().reset_index()
         fig_line = px.line(open_gr, x='Date', y='Open', title='Open Price') # Plotting the line chart
@@ -155,17 +154,20 @@ with coll1:
     st.plotly_chart(vol_bar, use_container_width=True)
 
 with coll2:
-    df_mov=df[df['Date'].dt.year>=2020]
-    df_mov['50-day'] = df_mov['Close'].rolling(window=50).mean()
-    df_mov['200-day'] = df_mov['Close'].rolling(window=200).mean()
+    Vwap=px.line(vwDf,x='Date',y='VWAP',title="Volume-Weighted Average Price (VWAP)")
+    st.plotly_chart(Vwap)
+st.markdown('---')
 
-    # Create the line chart
-    fig = px.line(df_mov, x='Date', y=['50-day', '200-day'], title='Moving Averages')
-    fig.update_xaxes(title='Date')
-    fig.update_yaxes(title='Price')
+df_mov=df[df['Date'].dt.year>=2020]
+df_mov['50-day'] = df_mov['Close'].rolling(window=50).mean()
+df_mov['200-day'] = df_mov['Close'].rolling(window=200).mean()
 
-    # Display the line chart using Streamlit
-    st.plotly_chart(fig)
+# Create the line chart
+fig = px.line(df_mov, x='Date', y=['50-day', '200-day'], title='Moving Averages')
+fig.update_xaxes(title='Date')
+fig.update_yaxes(title='Price')
+# Display the line chart using Streamlit
+st.plotly_chart(fig, use_container_width=True)
 
 
 hide_st_style = """
