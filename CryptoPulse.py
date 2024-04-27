@@ -35,7 +35,7 @@ df = pd.read_excel(
 )
 
 # Main Page
-st.markdown("<h1 style='text-align: center; color:#ffffff;'> StockPlex: Dynamic Market Insights</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color:#ffffff;'> CryptoPulse: Bitcoin Analytics Dashboard</h1>", unsafe_allow_html=True)
 st.markdown("##")
 
 
