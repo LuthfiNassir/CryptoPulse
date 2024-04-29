@@ -15,34 +15,29 @@ CryptoPulse is a Python-based analytics dashboard for monitoring and analyzing B
 To get started with CryptoPulse, follow these steps:
 
 1. **Clone the Repository:**
-```git clone https://github.com/yourusername/CryptoPulse.git
-cd CryptoPulse ```
-
+```
+git clone https://github.com/yourusername/CryptoPulse.git
+cd CryptoPulse
+```
 2. **Install Dependencies:**
+ ```
 pip install -r requirements.txt
-
-3. **Run the Dashboard:**
-python dashboard.py
-
-4. **Access the Dashboard:**
-Open your web browser and navigate to `http://localhost:8080` to access the CryptoPulse dashboard.
+```
+4. **Run the Dashboard:**
+```
+python -m streamlit run CryptoPulse.py
+```
 
 ## Requirements
 
 - Python 3.x
 - Pandas
 - Plotly
-- Dash
+- Streamlit
 - Other dependencies listed in `requirements.txt`
 
-## Contributing
 
-Contributions are welcome! If you have suggestions for new features, improvements, or bug fixes, feel free to open an issue or submit a pull request.
+## Contributing:
+Contributions to the dashboard project are welcome! If you have any ideas for improvements, new features, or bug fixes, feel free to open an issue or submit a pull request. &#x1F917;
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgements
-
-- Special thanks to [OpenAI](https://openai.com) for providing the tools and resources to develop this project.
+Original Dataset: [Dataset](https://www.kaggle.com/datasets/faizaniftikharjanjua/metaverse-financial-transactions-dataset)
