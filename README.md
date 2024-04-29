@@ -15,9 +15,7 @@
 > [!TIP]
 
 > - Set clear trading goals and stick to your strategy. Avoid emotional decision-making based on short-term price movements.
-
 > - Diversify your cryptocurrency portfolio to spread risk and capture opportunities across different assets.
-
 > - Keep track of market news and events that may impact cryptocurrency prices, such as regulatory developments or technological advancements.
 
 
