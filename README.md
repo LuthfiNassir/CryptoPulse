@@ -24,7 +24,7 @@ To get started with CryptoPulse, follow these steps:
 
 1. **Clone the Repository:**
 ```
-git clone https://github.com/LuthfiNassir/CryptoPulse.git
+git clone "https://github.com/LuthfiNassir/CryptoPulse.git"
 cd CryptoPulse
 ```
 2. **Install Dependencies:**
