@@ -5,6 +5,14 @@
 - `Interactive Visualizations:` Visualize Bitcoin price movements, trading volume, and technical indicators such as Relative Strength Index (RSI) and Bollinger Bands using intuitive and interactive charts.
   
 - `Customizable Dashboard:` Tailor the dashboard to your specific needs by selecting the time period, indicators, and chart types that matter most to you.
+  
+- `User-Friendly Interface:` Enjoy a user-friendly interface with intuitive navigation and interactive features for seamless analysis.
+
+- `Historical Data Analysis:` Gain insights into Bitcoin price movements over time with interactive charts and graphs.
+
+- `Technical Indicators:` Track key technical indicators such as Relative Strength Index (RSI), Bollinger Bands, and Moving Averages to identify potential trends and patterns.
+
+
 
 ## Getting Started
 
@@ -31,6 +39,14 @@ python -m streamlit run CryptoPulse.py
 - Plotly
 - Streamlit
 - Other dependencies listed in `requirements.txt`
+
+> [!NOTE]
+> - The dashboard is for educational and informational purposes only and should not be considered financial advice.
+> -Use caution when making trading decisions based on the information provided by the dashboard. Always conduct thorough research and consult with a financial advisor before making any investment decisions.
+
+> [!WARNING]
+> - Cryptocurrency markets are highly volatile and subject to sudden price fluctuations. Exercise caution and risk management when trading cryptocurrencies.
+> - The dashboard relies on external data sources, and there may be delays or inaccuracies in the data. Always verify information from multiple sources before making trading decisions.
 
 
 ## Contributing:
