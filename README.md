@@ -55,5 +55,3 @@ python -m streamlit run CryptoPulse.py
 
 ## Contributing:
 Contributions to the dashboard project are welcome! If you have any ideas for improvements, new features, or bug fixes, feel free to open an issue or submit a pull request. &#x1F917;
-
-Original Dataset: [Dataset](https://www.kaggle.com/datasets/faizaniftikharjanjua/metaverse-financial-transactions-dataset)
