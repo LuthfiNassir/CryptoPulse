@@ -15,8 +15,8 @@ CryptoPulse is a Python-based analytics dashboard for monitoring and analyzing B
 To get started with CryptoPulse, follow these steps:
 
 1. **Clone the Repository:**
-git clone https://github.com/yourusername/CryptoPulse.git
-cd CryptoPulse
+```git clone https://github.com/yourusername/CryptoPulse.git
+cd CryptoPulse ```
 
 2. **Install Dependencies:**
 pip install -r requirements.txt
